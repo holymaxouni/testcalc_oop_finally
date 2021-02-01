@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TestCalc</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+            crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+            crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+</head>
+<body>
+<div class="container-fluid ">
+    <div class="card">
+        <div class="row m-0">
+            <div class="col-12 header">
+                <p class="header pt-3 pl-4 text-white"><b>Рассчитайте стоимость вашего окна</b></p>
+            </div>
+        </div>
+        <div class="row m-0 mt-3 pl-3 mb-4">
+            <div class="col-4 pl-4">
+                <p>Размер окна, мм</p>
+                <div class="input-group pr-5 window-size">
+                    <input type="text" aria-label="Width" class="form-control mr-3" placeholder="Ширина" id="input-width" >
+                    <p class="grey mt-2">X</p>
+                    <input type="text" aria-label="Height" class="form-control ml-3" placeholder="Высота" id="input-height">
+                </div>
+            </div>
+            <div class="col-4 pl-4"><p>Производитель</p>
+                <div class="container-fluid">
+                    <div class="row ">
+                        <div class="btn-group brand" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-light logo " data-coeff="1" id="kbe"></button>
+                            <button type="button" class="btn btn-outline-light logo ml-2" data-coeff="1.4" id="rehau"></button>
+                            <button type="button" class="btn btn-outline-light logo ml-2" data-coeff="1.5" id="montblanc"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 pl-4">
+                <p>Тип профиля</p>
+                <select class="select-style" id="type-of-profile">
+                    <option value="1">Engine</option>
+                    <option value="2">Expert</option>
+                </select>
+            </div>
+        </div>
+        <div class="row m-0 pl-4 border-top pt-3">
+            <p class="pl-3">Количество секций</p>
+        </div>
+        <div class="row count-windows m-0 pl-3 ">
+            <div class="col-2 pl-3 ">
+                <button  type="button" class="ml-2 btn btn-outline-light d-flex justify-content-center window" id="one" data-count="one">
+                </button>
+            </div>
+            <div class="col-4  d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-light d-flex justify-content-center two-windows" id="two" data-count="two">
+                </button>
+            </div>
+            <div class="col-6   d-flex justify-content-end pr-4">
+                <button type="button" class="btn btn-outline-light d-flex justify-content-center three-windows mr-3" id="three" data-count="three">
+                </button>
+            </div>
+        </div>
+        <div class="row  m-0 pl-3 mt-4 ">
+            <div class="col-2 pr-5 ml-2">
+                <select class="select-style ml-1" id="one-type-selector">
+                    <option value="default" >Глухая</option>
+                    <option value="turn">Поворотная</option>
+                </select>
+            </div>
+            <div class="col-4 pl-5 d-flex pr-5 ml-3">
+                <select class="select-style ml-5 " id="two-type-first">
+                    <option value="default" data-power="1">Глухая</option>
+                    <option value="turn" data-power="2">Поворотная</option>
+                    <option value="turn_away" data-power="3">Поворотно-откидная</option>
+                </select>
+                <select class="select-style ml-3" id="two-type-second">
+                    <option value="default" data-power="1">Глухая</option>
+                    <option value="turn" data-power="2">Поворотная</option>
+                    <option value="turn_away" data-power="3">Поворотно-откидная</option>
+                </select>
+            </div>
+            <div class="ml-5 col-5 d-flex justify-content-end p-0 pr-1">
+                <p class="red pt-5" id="notification">Нужен другой тип окна</p>
+            </div>
+        </div>
+        <div class="row mt-3 pl-4 m-0">
+            <div class="d-flex  align-items-end">
+                <span class="cost pl-3 mr-3" id="output"> 0 руб</span>
+                <p class="m-0 mb-2 cost-description">Стоимость вашего окна<br>
+                    с учетом монтажных работ</p>
+            </div>
+        </div>
+        <div class="row m-0 pl-4 mt-1">
+            <div class="d-flex align-items-end">
+                <span class="cost-moscow pl-3 mr-3" id="output-moscow"> 0 руб</span>
+                <p class="cost-moscow-description m-0 mb-2">Средняя цена по Москве</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="Calculator.js"></script>
+<script src="calc_clone.js"></script>
+<script src="buttons.js"></script>
+</body>
+</html>

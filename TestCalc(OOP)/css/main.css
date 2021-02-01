@@ -1,0 +1,138 @@
+body {
+    background: rgb(250, 250, 250);
+    font-size: 16px;
+}
+
+.header {
+    background-color: #00bd6f;
+    font-size: 1.5em;
+}
+
+.grey {
+    color: #777777;
+    user-select: none;
+}
+
+.dropdown-toggle::after {
+    position: absolute;
+    top: 40%;
+    right: 5%;
+    border: solid #BBBBBB;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.window-size input {
+    border-radius: 5px !important;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #f26c4f;
+    outline: 0;
+    border-radius: 5px;
+    box-shadow: none;
+    border-width: 2px;
+}
+
+.form-control:hover {
+    border-color: #f26c4f;
+}
+
+.btn-outline-light {
+    border-color: #eeeeee;
+    color: #777777;
+}
+
+.logo {
+    width: 108px;
+    height: 51px;
+    border-radius: 5px !important;
+}
+
+.btn-outline-light:active, .btn-outline-light:hover {
+    background-color: white !important;
+    border-color: #f26c4f !important;
+    box-shadow: none !important;
+}
+
+
+.button-toggle {
+    border-width: 2px;
+    background-color: white !important;
+    border-color: #f26c4f !important;
+    box-shadow: none !important;
+}
+
+.logo:first-of-type {
+    background: url(../logos/logo-sprite.gif) no-repeat 20px 5px;
+}
+
+.logo:nth-of-type(2) {
+    background: url(../logos/logo-sprite.gif) no-repeat -100px 5px;
+}
+
+.logo:last-of-type {
+    background: url(../logos/logo-sprite.gif) no-repeat -218px 5px;
+}
+
+.choose {
+    width: 13.59rem;
+}
+
+.window {
+    height: 12.9rem;
+    width: 9.8rem;
+    background: url(../Windows/window.jpg) no-repeat center center;
+
+}
+
+.two-windows {
+    height: 12.9rem;
+    width: 19.64rem;
+    background: url(../Windows/window-2.jpg) no-repeat center center;
+
+}
+.red {
+    font-size: 14pt;
+    color: white;
+    user-select: none;
+}
+
+.three-windows {
+    height: 12.9rem;
+    width: 29.37rem;
+    background: url(../Windows/three-windows.jpg) no-repeat center center;
+
+}
+
+.select-style {
+    width: 100%;
+    height: 25px;
+}
+
+.cost {
+    color: #00bd6f;
+    font-size: 50pt;
+    font-weight: bold;
+}
+
+.cost-moscow {
+    color: #8e8e8e;
+    font-size: 28pt;
+    font-weight: bold;
+}
+
+.cost-description {
+    font-size: 14pt;
+    color: #00bd6f;
+}
+
+.cost-moscow-description {
+    font-size: 14pt;
+    color: #8e8e8e;
+}

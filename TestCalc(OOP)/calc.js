@@ -338,7 +338,7 @@ const windowObject = {
             result: 0,
             totalResult: 0,
             k: 0,
-            b: null,
+            b: 0,
             totalCoeff: 0,
             outputValue: null,
             outputMoscowValue: null,
@@ -365,14 +365,137 @@ const windowObject = {
         this.data.sectionType.secondArrayOption = this.data.sectionType.twoTypeSecond.querySelectorAll('option')
         this.data.output.outputValue = document.getElementById('output')
         this.data.output.outputMoscowValue = document.getElementById('output-moscow')
+        this.data.size.inputWidth.addEventListener('change', (e) => {
+            if (typeof e.target.value !== "string") {
+                return;
+            }
+            let eCheck = Math.round(e.target.value / 100) * 100;
+            this.data.key.widthKey = String(eCheck);
+            getCoeff();
+            getPrice();
+        })
+        this.data.size.inputHeight.addEventListener('change', (b) => {
+            if (typeof b.target.value !== "string") {
+                return;
+            }
+            let bCheck = Math.round(b.target.value / 100) * 100;
+            if (this.data.key.windowCountKey === 'one' && b.target.value >= 1000 && b.target.value <= 1099) {
+                bCheck = 1000;
+            }
+            this.data.key.heightKey = String(bCheck);
+            getCoeff();
+            getPrice();
+        })
+        this.data.brands.kbe.addEventListener('click', () => {
+            this.data.output.k = String(this.data.brands.kbe.dataset.coeff);
+        })
+        this.data.brands.rehau.addEventListener('click', () => {
+            this.data.output.k = String(this.data.brands.rehau.dataset.coeff);
+        })
+        this.data.brands.montblanc.addEventListener('click', () => {
+            this.data.output.k = String(this.data.brands.montblanc.dataset.coeff);
+        })
+        this.data.type.typeProfile.addEventListener('change', (e) => {
+            this.data.type.typeProfileValue = String(e.target.value);
+            getPrice();
+            getCoeff();
+
+        })
+        //___Количество секций___//
+        this.data.quantity.oneWindow.addEventListener('click', () => {
+            this.data.key.windowCountKey = this.data.quantity.oneWindow.dataset.count;
+
+        })
+        this.data.quantity.twoWindows.addEventListener('click', () => {
+            this.data.key.windowCountKey = this.data.quantity.twoWindows.dataset.count;
+
+        })
+        this.data.quantity.threeWindows.addEventListener('click', () => {
+            this.data.key.windowCountKey = this.data.quantity.threeWindows.dataset.count;
+
+        })
+
+        //___Тип секций___//
+        this.data.sectionType.oneTypeSelector.addEventListener('change', (e) => {
+            this.data.key.windowTypeKey1 = e.target.value;
+            getCoeff();
+            getPrice();
+
+        })
+        this.data.sectionType.twoTypeFirst.addEventListener('change', (e) => {
+            this.data.key.windowTypeKey2 = e.target.value;
+
+            if (this.data.sectionType.firstArrayOption[1].value === this.data.key.windowTypeKey2) {
+                this.data.sectionType.secondArrayOption[1].disabled = true;
+                this.data.sectionType.secondArrayOption[0].selected = true;
+                this.data.sectionType.secondArrayOption[0].removeAttribute("disabled");
+                this.data.sectionType.secondArrayOption[2].removeAttribute("disabled");
+                this.data.sectionType.selectPowerFirst =
+                    this.data.sectionType.firstArrayOption[1].dataset.power;
+
+            }
+            if (this.data.sectionType.firstArrayOption[0].value === this.data.key.windowTypeKey2) {
+                this.data.sectionType.selectPowerFirst =
+                    this.data.sectionType.firstArrayOption[0].dataset.power;
+                for (let i = 0; i < this.data.sectionType.secondArrayOption.length; i++) {
+                    this.data.sectionType.secondArrayOption[i].removeAttribute("disabled");
+                }
+                this.data.sectionType.secondArrayOption[1].removeAttribute("disabled");
+                this.data.sectionType.secondArrayOption[2].removeAttribute("disabled");
+            }
+            if (this.data.sectionType.firstArrayOption[2].value === windowObject.data.key.windowTypeKey2) {
+                this.data.sectionType.selectPowerFirst =
+                    this.data.sectionType.firstArrayOption[2].dataset.power;
+                this.data.sectionType.secondArrayOption[0].disabled = true;
+                this.data.sectionType.secondArrayOption[1].selected = true;
+                this.data.sectionType.secondArrayOption[2].disabled = true;
+                this.data.sectionType.secondArrayOption[1].removeAttribute("disabled");
+            }
+            getCoeff();
+            getPrice();
+
+        })
+        this.data.sectionType.twoTypeSecond.addEventListener('change', (e) => {
+            this.data.key.windowTypeKey3 = e.target.value;
+
+            if (this.data.sectionType.secondArrayOption[1].value === this.data.key.windowTypeKey3) {
+                this.data.sectionType.firstArrayOption[1].disabled = true;
+                this.data.sectionType.firstArrayOption[0].selected = true;
+                this.data.sectionType.firstArrayOption[0].removeAttribute("disabled");
+                this.data.sectionType.firstArrayOption[2].removeAttribute("disabled");
+                this.data.sectionType.selectPowerSecond =
+                    this.data.sectionType.secondArrayOption[1].dataset.power;
+
+            }
+            if (this.data.sectionType.secondArrayOption[0].value === this.data.key.windowTypeKey3) {
+                this.data.sectionType.selectPowerSecond =
+                    this.data.sectionType.secondArrayOption[0].dataset.power;
+                for (let i = 0; i < this.data.sectionType.firstArrayOption.length; i++) {
+                    this.data.sectionType.firstArrayOption[i].removeAttribute("disabled");
+                }
+                this.data.sectionType.firstArrayOption[1].removeAttribute("disabled");
+                this.data.sectionType.firstArrayOption[2].removeAttribute("disabled");
+            }
+            if (this.data.sectionType.secondArrayOption[2].value === this.data.key.windowTypeKey3) {
+                this.data.sectionType.selectPowerSecond =
+                    this.data.sectionType.secondArrayOption[2].dataset.power;
+                this.data.sectionType.firstArrayOption[0].disabled = true;
+                this.data.sectionType.firstArrayOption[1].selected = true;
+                this.data.sectionType.firstArrayOption[2].disabled = true;
+                this.data.sectionType.firstArrayOption[1].removeAttribute("disabled");
+            }
+            getCoeff();
+            getPrice();
+
+        })
     },
-    totalCoeff() {
+    getCoeff() {
         this.data.output.b = this.coeffs[this.data.output.k][this.data.type.typeProfileValue];
         this.data.output.totalCoeff = this.data.output.b * this.data.output.k;
         return this.data.output.totalCoeff;
 
     },
-    validPrice() {
+    getPrice() {
         if (this.data.key.windowCountKey === 'one') {
             this.data.key.windowTypeKey = this.data.key.windowTypeKey1;
             this.data.output.checkWidth = Number(this.data.key.widthKey);
@@ -447,6 +570,7 @@ const windowObject = {
         }
         this.data.output.result = this[this.data.key.windowCountKey][this.data.key.windowTypeKey]
             [this.data.key.widthKey][this.data.key.heightKey];
+
         return this.data.output.result;
     },
     renderResult() {
@@ -479,9 +603,9 @@ const windowObject = {
     }
 
 };
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
     init();
-    configPrice();
+
 });
 let coeff = document.querySelector('.brand');
 let checkWindowsCount = document.querySelector('.count-windows');
@@ -490,158 +614,37 @@ coeff.addEventListener("click", (evt) => {
     if (target.tagName !== "BUTTON") {
         return;
     }
-    totalCoeff();
+    getCoeff();
+    getPrice();
 });
 checkWindowsCount.addEventListener('click', (evt) => {
     let target = evt.target;
     if (target.tagName !== "BUTTON") {
         return;
     }
-    validPrice();
+    getCoeff();
+    getPrice();
 });
 
 function init() {
     windowObject.init();
 }
 
-function totalCoeff() {
-    windowObject.totalCoeff();
-    if(windowObject.totalCoeff() > 0) {
+function getCoeff() {
+    windowObject.getCoeff();
+
+    if (windowObject.getCoeff() >= 0) {
         renderResult();
     }
 }
 
-function validPrice() {
-    windowObject.validPrice();
-    if (windowObject.validPrice() > 0) {
+function getPrice() {
+    windowObject.getPrice();
+    if (windowObject.getPrice() >= 0) {
         renderResult();
     }
 }
-function  renderResult() {
+
+function renderResult() {
     windowObject.renderResult();
-}
-
-
-
-//___Функции___//
-
-
-function configPrice() {
-    //___Ширина и высота___//
-    windowObject.data.size.inputWidth.addEventListener('change', (e) => {
-        if (typeof e.target.value !== "string") {
-            return;
-        }
-        let eCheck = Math.round(e.target.value / 100) * 100;
-        windowObject.data.key.widthKey = String(eCheck);
-
-    });
-    windowObject.data.size.inputHeight.addEventListener('change', (b) => {
-            if (typeof b.target.value !== "string") {
-                return;
-            }
-            let bCheck = Math.round(b.target.value / 100) * 100;
-            if (windowObject.data.key.windowCountKey === 'one' && b.target.value >= 1000 && b.target.value <= 1099) {
-                bCheck = 1000;
-            }
-            windowObject.data.key.heightKey = String(bCheck);
-        }
-    );
-
-    //___Выбор производителя___//
-    windowObject.data.brands.kbe.addEventListener('click', () => {
-        windowObject.data.output.k = String(windowObject.data.brands.kbe.dataset.coeff);
-    });
-    windowObject.data.brands.rehau.addEventListener('click', () => {
-        windowObject.data.output.k = String(windowObject.data.brands.rehau.dataset.coeff);
-    });
-    windowObject.data.brands.montblanc.addEventListener('click', () => {
-        windowObject.data.output.k = String(windowObject.data.brands.montblanc.dataset.coeff);
-    });
-
-    //___Тип профиля___//
-    windowObject.data.type.typeProfile.addEventListener('change', (e) => {
-        windowObject.data.type.typeProfileValue = String(e.target.value);
-
-    });
-
-    //___Количество секций___//
-    windowObject.data.quantity.oneWindow.addEventListener('click', () => {
-        windowObject.data.key.windowCountKey = windowObject.data.quantity.oneWindow.dataset.count;
-    });
-    windowObject.data.quantity.twoWindows.addEventListener('click', () => {
-        windowObject.data.key.windowCountKey = windowObject.data.quantity.twoWindows.dataset.count;
-    });
-    windowObject.data.quantity.threeWindows.addEventListener('click', () => {
-        windowObject.data.key.windowCountKey = windowObject.data.quantity.threeWindows.dataset.count;
-    });
-
-    //___Тип секций___//
-    windowObject.data.sectionType.oneTypeSelector.addEventListener('change', (e) => {
-        windowObject.data.key.windowTypeKey1 = e.target.value;
-
-
-    });
-    windowObject.data.sectionType.twoTypeFirst.addEventListener('change', (e) => {
-        windowObject.data.key.windowTypeKey2 = e.target.value;
-
-        if (windowObject.data.sectionType.firstArrayOption[1].value === windowObject.data.key.windowTypeKey2) {
-            windowObject.data.sectionType.secondArrayOption[1].disabled = true;
-            windowObject.data.sectionType.secondArrayOption[0].selected = true;
-            windowObject.data.sectionType.secondArrayOption[0].removeAttribute("disabled");
-            windowObject.data.sectionType.secondArrayOption[2].removeAttribute("disabled");
-            windowObject.data.sectionType.selectPowerFirst =
-                windowObject.data.sectionType.firstArrayOption[1].dataset.power;
-
-        }
-        if (windowObject.data.sectionType.firstArrayOption[0].value === windowObject.data.key.windowTypeKey2) {
-            windowObject.data.sectionType.selectPowerFirst =
-                windowObject.data.sectionType.firstArrayOption[0].dataset.power;
-            for (let i = 0; i < windowObject.data.sectionType.secondArrayOption.length; i++) {
-                windowObject.data.sectionType.secondArrayOption[i].removeAttribute("disabled");
-            }
-            windowObject.data.sectionType.secondArrayOption[1].removeAttribute("disabled");
-            windowObject.data.sectionType.secondArrayOption[2].removeAttribute("disabled");
-        }
-        if (windowObject.data.sectionType.firstArrayOption[2].value === windowObject.data.key.windowTypeKey2) {
-            windowObject.data.sectionType.selectPowerFirst =
-                windowObject.data.sectionType.firstArrayOption[2].dataset.power;
-            windowObject.data.sectionType.secondArrayOption[0].disabled = true;
-            windowObject.data.sectionType.secondArrayOption[1].selected = true;
-            windowObject.data.sectionType.secondArrayOption[2].disabled = true;
-            windowObject.data.sectionType.secondArrayOption[1].removeAttribute("disabled");
-        }
-
-
-    });
-    windowObject.data.sectionType.twoTypeSecond.addEventListener('change', (e) => {
-        windowObject.data.key.windowTypeKey3 = e.target.value;
-
-        if (windowObject.data.sectionType.secondArrayOption[1].value === windowObject.data.key.windowTypeKey3) {
-            windowObject.data.sectionType.firstArrayOption[1].disabled = true;
-            windowObject.data.sectionType.firstArrayOption[0].selected = true;
-            windowObject.data.sectionType.firstArrayOption[0].removeAttribute("disabled");
-            windowObject.data.sectionType.firstArrayOption[2].removeAttribute("disabled");
-            windowObject.data.sectionType.selectPowerSecond =
-                windowObject.data.sectionType.secondArrayOption[1].dataset.power;
-        }
-        if (windowObject.data.sectionType.secondArrayOption[0].value === windowObject.data.keywindowTypeKey3) {
-            windowObject.data.sectionType.selectPowerSecond = secondArrayOption[0].dataset.power;
-            windowObject.data.sectionType.firstArrayOption[0].removeAttribute("disabled")
-
-            for (let i = 0; i < windowObject.data.sectionType.secondArrayOption.length; i++) {
-                windowObject.data.sectionType.secondArrayOption[i].removeAttribute("disabled");
-            }
-            windowObject.data.sectionType.firstArrayOption[1].removeAttribute("disabled");
-            windowObject.data.sectionType.firstArrayOption[2].removeAttribute("disabled");
-        }
-        if (windowObject.data.sectionType.secondArrayOption[2].value === windowObject.data.key.windowTypeKey3) {
-            windowObject.data.sectionType.firstArrayOption[0].disabled = true;
-            windowObject.data.sectionType.firstArrayOption[1].selected = true;
-            windowObject.data.sectionType.firstArrayOption[2].disabled = true;
-            windowObject.data.sectionType.firstArrayOption[1].removeAttribute("disabled");
-            windowObject.data.sectionType.selectPowerSecond =
-                windowObject.data.sectionType.secondArrayOption[2].dataset.power;
-        }
-    });
 }
